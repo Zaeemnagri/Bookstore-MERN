@@ -6,7 +6,7 @@ export default function BookCard({ book }) {
     ? (book.coverUrl.startsWith('/uploads')
         ? `${process.env.REACT_APP_API || 'http://localhost:5000'}${book.coverUrl}`
         : book.coverUrl)
-    : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdVtbmeAa1QqXYGQakkD0kqm741Mxra-uArQ&s';
+    : 'https://png.pngtree.com/png-vector/20250513/ourmid/pngtree-colorful-books-pens-and-ruler-back-to-school-stationery-png-image_16265965.png';
 
   return (
     <Link to={`/books/${book._id}`}>
