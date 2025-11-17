@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { isAuthenticated, logout, isAdmin } from "../utils/auth";
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { isAuthenticated, logout, isAdmin } from '../utils/auth';
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+
   const auth = isAuthenticated();
   const admin = isAdmin();
-  const name = localStorage.getItem("name");
-
-  const [menuOpen, setMenuOpen] = useState(false);
+  const name = localStorage.getItem('name');
 
   function doLogout() {
     logout();
-    navigate("/");
+    navigate('/');
   }
 
   return (
-    <nav className="bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 shadow-md text-white">
+    <nav className="bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 shadow-md backdrop-blur-md text-white">
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
 
         {/* Logo */}
@@ -27,120 +27,95 @@ export default function Navbar() {
           BookStore
         </Link>
 
-        {/* RIGHT SIDE ON NAVBAR */}
+        {/* Right Side */}
         <div className="flex items-center gap-4">
 
-          {/* Show Hi, Username always */}
+          {/* Hi username (visible on desktop + mobile) */}
           {auth && (
-            <span className="text-yellow-100 font-medium mr-2 sm:mr-3">
+            <span className="hidden sm:block text-yellow-100 font-medium">
               Hi, {name || "User"}
             </span>
           )}
 
+          {/* Desktop Menu */}
+          <div className="hidden sm:flex items-center gap-6">
 
-          {/* Desktop Menu Links */}
-          <div className="hidden md:flex items-center gap-6">
-
-            <Link to="/" className="font-semibold hover:text-yellow-300 transition">
+            <Link to="/" className="font-semibold hover:text-yellow-300 transition duration-300">
               Home
             </Link>
 
-            <Link to="/cart" className="font-semibold hover:text-yellow-300 transition">
+            <Link to="/cart" className="font-semibold hover:text-yellow-300 transition duration-300">
               Cart
             </Link>
 
+            <Link to="/contact" className="font-semibold hover:text-yellow-300 transition duration-300">
+              Contact
+            </Link>
+
             {admin && (
-              <Link to="/admin" className="font-semibold hover:text-yellow-300 transition">
+              <Link to="/admin" className="font-semibold hover:text-yellow-300 transition duration-300">
                 Admin
               </Link>
             )}
 
             {auth ? (
-              <button
-                onClick={doLogout}
-                className="bg-red-600 hover:bg-red-700 px-4 py-1.5 rounded-full shadow-lg transition"
-              >
-                Logout
-              </button>
+              <>
+                <button
+                  onClick={doLogout}
+                  className="bg-red-600 hover:bg-red-700 text-white px-4 py-1.5 rounded-full shadow-lg transition duration-300"
+                >
+                  Logout
+                </button>
+              </>
             ) : (
               <>
-                <Link to="/login" className="font-semibold hover:text-yellow-300 transition">
+                <Link to="/login" className="font-semibold hover:text-yellow-300 transition duration-300">
                   Login
                 </Link>
-                <Link to="/register" className="font-semibold hover:text-yellow-300 transition">
+                <Link to="/register" className="font-semibold hover:text-yellow-300 transition duration-300">
                   Register
                 </Link>
               </>
             )}
+
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-white text-3xl focus:outline-none"
-            onClick={() => setMenuOpen(!menuOpen)}
+            onClick={() => setOpen(!open)}
+            className="sm:hidden text-2xl font-bold px-3 py-1 bg-white/20 rounded-md backdrop-blur hover:bg-white/30"
           >
             ⋮
           </button>
         </div>
       </div>
 
-      {/* Mobile Dropdown (No Hi, Username here) */}
-      {menuOpen && (
-        <div className="md:hidden bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 shadow-lg p-4 space-y-3 animate-fadeIn">
+      {/* Mobile Dropdown */}
+      {open && (
+        <div className="sm:hidden bg-white/20 backdrop-blur-md px-6 py-4 flex flex-col gap-3 text-white">
 
-          <Link
-            to="/"
-            className="block font-semibold hover:text-yellow-300 transition"
-            onClick={() => setMenuOpen(false)}
-          >
-            Home
-          </Link>
-
-          <Link
-            to="/cart"
-            className="block font-semibold hover:text-yellow-300 transition"
-            onClick={() => setMenuOpen(false)}
-          >
-            Cart
-          </Link>
+          <Link to="/" onClick={() => setOpen(false)} className="font-semibold">Home</Link>
+          <Link to="/cart" onClick={() => setOpen(false)} className="font-semibold">Cart</Link>
+          <Link to="/contact" onClick={() => setOpen(false)} className="font-semibold">Contact</Link>
 
           {admin && (
-            <Link
-              to="/admin"
-              className="block font-semibold hover:text-yellow-300 transition"
-              onClick={() => setMenuOpen(false)}
-            >
-              Admin
-            </Link>
+            <Link to="/admin" onClick={() => setOpen(false)} className="font-semibold">Admin</Link>
           )}
 
           {auth ? (
             <button
               onClick={() => {
                 doLogout();
-                setMenuOpen(false);
+                setOpen(false);
               }}
-              className="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-full shadow"
+              className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow"
             >
               Logout
             </button>
           ) : (
             <>
-              <Link
-                to="/login"
-                className="block font-semibold hover:text-yellow-300 transition"
-                onClick={() => setMenuOpen(false)}
-              >
-                Login
-              </Link>
-
-              <Link
-                to="/register"
-                className="block font-semibold hover:text-yellow-300 transition"
-                onClick={() => setMenuOpen(false)}
-              >
-                Register
-              </Link>
+              <Link to="/login" onClick={() => setOpen(false)} className="font-semibold">Login</Link>
+              <Link to="/register" onClick={() => setOpen(false)} className="font-semibold">Register</Link>
             </>
           )}
         </div>
