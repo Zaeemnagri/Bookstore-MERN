@@ -32,7 +32,7 @@ export default function Home() {
       {/* Hero Section */}
       <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl p-8 shadow-2xl mb-8 text-center">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-2 leading-tight">
-        ✨ Discover Your Next Favorite Book ✨
+         Discover Your Next Favorite Book 
         </h1>
 
         <p className="text-lg text-gray-100 mb-6">
