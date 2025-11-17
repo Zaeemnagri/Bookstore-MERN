@@ -9,6 +9,7 @@ import CartPage from './pages/CartPage';
 import Checkout from './pages/Checkout';
 import Profile from './pages/Profile';
 import AdminDashboard from './pages/AdminDashboard';
+import Contact from './pages/Contact';
 import { isAuthenticated, isAdmin } from './utils/auth';
 
 function PrivateRoute({ children }) {
@@ -32,6 +33,8 @@ export default function App(){
           <Route path="/checkout" element={<PrivateRoute><Checkout/></PrivateRoute>} />
           <Route path="/profile" element={<PrivateRoute><Profile/></PrivateRoute>} />
           <Route path="/admin" element={<AdminRoute><AdminDashboard/></AdminRoute>} />
+          <Route path="/contact" element={<Contact />} />
+
         </Routes>
       </div>
     </BrowserRouter>
