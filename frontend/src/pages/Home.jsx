@@ -31,7 +31,10 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600 bg-[length:200%_200%] animate-gradientMove p-8 text-white transition-all duration-1000">
       {/* Hero Section */}
       <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl p-8 shadow-2xl mb-8 text-center">
-        <h1 className="text-5xl font-extrabold mb-2">✨ Discover Your Next Favorite Book ✨</h1>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-2 leading-tight">
+        ✨ Discover Your Next Favorite Book ✨
+        </h1>
+
         <p className="text-lg text-gray-100 mb-6">
           Explore bestsellers, new arrivals, and timeless classics crafted just for you.
         </p>
