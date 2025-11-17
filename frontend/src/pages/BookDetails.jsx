@@ -36,7 +36,7 @@ export default function BookDetails(){
   }
 
   if(!book) return <div>Loading...</div>;
-  const cover = book.coverUrl ? (book.coverUrl.startsWith('/uploads') ? `${process.env.REACT_APP_API || 'http://localhost:5000'}${book.coverUrl}` : book.coverUrl) : 'https://via.placeholder.com/300x420?text=Cover';
+  const cover = book.coverUrl ? (book.coverUrl.startsWith('/uploads') ? `${process.env.REACT_APP_API || 'http://localhost:5000'}${book.coverUrl}` : book.coverUrl) : 'https://pngimg.com/d/book_PNG51058.png';
 
   return (
     <div className="grid md:grid-cols-3 gap-6">
