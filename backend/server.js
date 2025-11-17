@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const path = require('path');
+const contactRoutes = require("./routes/contact");
 
 dotenv.config();
 const app = express();
@@ -25,6 +26,7 @@ app.use('/api/cart', require('./routes/cart'));
 app.use('/api/orders', require('./routes/orders'));
 app.use('/api/reviews', require('./routes/reviews'));
 app.use('/api/wishlist', require('./routes/wishlist'));
+app.use("/api/contact", contactRoutes);
 
 // fallback
 app.get('/', (req,res) => res.json({ msg: 'Bookstore API' }));
