@@ -85,11 +85,12 @@ export default function Contact() {
           <p className="mb-2">0330-1234567</p>
 
           <p className="font-semibold text-lg">📧 Email:</p>
-          <p>bookstore.help@gmail.com</p>
+          <p>nagribookstore@gmail.com</p>
         </div>
 
       </div>
     </div>
   );
 }
+
 
