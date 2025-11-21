@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import api from '../api';
 import { useNavigate } from 'react-router-dom';
 
-export default function Checkout(){
+export default function Checkout() {
   const [name, setName] = useState('');
   const [mobile, setMobile] = useState('');   // ⭐ NEW FIELD
   const [address, setAddress] = useState('');
@@ -13,7 +13,19 @@ export default function Checkout(){
   const cart = JSON.parse(localStorage.getItem('cart') || '[]');
   const total = cart.reduce((s, it) => s + (it.price * it.qty), 0);
 
-  async function placeOrder(){
+  async function placeOrder() {
+    // 🌟 Frontend Validation
+    if (!name || !mobile || !address || !city || !postal) {
+      alert("Please fill all fields before placing the order.");
+      return;
+    }
+
+    // Optional: check valid mobile number
+    if (mobile.length < 11) {
+      alert("Please enter a valid 11-digit mobile number.");
+      return;
+    }
+
     try {
       const items = cart.map(it => ({
         book: it.bookId,
@@ -27,7 +39,7 @@ export default function Checkout(){
         items,
         shippingAddress: {
           name,
-          mobile,         // ⭐ SEND MOBILE IN ORDER DATA
+          mobile,
           address,
           city,
           postalCode: postal,
@@ -40,7 +52,7 @@ export default function Checkout(){
       alert('Order placed successfully!');
       navigate('/profile');
 
-    } catch(err){
+    } catch (err) {
       alert(err?.response?.data?.message || err.message);
     }
   }
@@ -50,47 +62,47 @@ export default function Checkout(){
       <h2 className="text-2xl font-bold mb-4">Checkout</h2>
 
       <div className="space-y-3">
-        <input 
-          value={name} 
-          onChange={e => setName(e.target.value)} 
-          placeholder="Full Name" 
-          className="w-full p-2 border rounded" 
+        <input
+          value={name}
+          onChange={e => setName(e.target.value)}
+          placeholder="Full Name"
+          className="w-full p-2 border rounded"
         />
 
-        {/* ⭐ NEW MOBILE NUMBER INPUT */}
-        <input 
-          value={mobile} 
-          onChange={e => setMobile(e.target.value)} 
-          placeholder="Mobile Number" 
-          className="w-full p-2 border rounded" 
+        {/* ⭐ MOBILE NUMBER INPUT */}
+        <input
+          value={mobile}
+          onChange={e => setMobile(e.target.value)}
+          placeholder="Mobile Number"
+          className="w-full p-2 border rounded"
         />
 
-        <input 
-          value={address} 
-          onChange={e => setAddress(e.target.value)} 
-          placeholder="Address" 
-          className="w-full p-2 border rounded" 
+        <input
+          value={address}
+          onChange={e => setAddress(e.target.value)}
+          placeholder="Address"
+          className="w-full p-2 border rounded"
         />
 
         <div className="flex gap-2">
-          <input 
-            value={city} 
-            onChange={e => setCity(e.target.value)} 
-            placeholder="City" 
-            className="w-1/2 p-2 border rounded" 
+          <input
+            value={city}
+            onChange={e => setCity(e.target.value)}
+            placeholder="City"
+            className="w-1/2 p-2 border rounded"
           />
-          <input 
-            value={postal} 
-            onChange={e => setPostal(e.target.value)} 
-            placeholder="Postal Code" 
-            className="w-1/2 p-2 border rounded" 
+          <input
+            value={postal}
+            onChange={e => setPostal(e.target.value)}
+            placeholder="Postal Code"
+            className="w-1/2 p-2 border rounded"
           />
         </div>
 
         <div className="text-right font-bold">Total: Rs {total}</div>
 
-        <button 
-          onClick={placeOrder} 
+        <button
+          onClick={placeOrder}
           className="w-full bg-green-600 text-white py-2 rounded"
         >
           Place Order (Mock)
@@ -99,4 +111,3 @@ export default function Checkout(){
     </div>
   );
 }
-
