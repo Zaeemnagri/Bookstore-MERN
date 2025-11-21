@@ -30,7 +30,7 @@ export default function Navbar() {
         {/* Right Side */}
         <div className="flex items-center gap-4">
 
-          {/* Hi username (visible on desktop + mobile) */}
+          {/* Hi username */}
           {auth && (
             <span className="hidden sm:block text-yellow-100 font-medium">
               Hi, {name || "User"}
@@ -52,6 +52,13 @@ export default function Navbar() {
               Contact
             </Link>
 
+            {/* ⭐ My Orders Button for users */}
+            {auth && (
+              <Link to="/my-orders" className="font-semibold hover:text-yellow-300 transition duration-300">
+                My Orders
+              </Link>
+            )}
+
             {admin && (
               <Link to="/admin" className="font-semibold hover:text-yellow-300 transition duration-300">
                 Admin
@@ -59,14 +66,12 @@ export default function Navbar() {
             )}
 
             {auth ? (
-              <>
-                <button
-                  onClick={doLogout}
-                  className="bg-red-600 hover:bg-red-700 text-white px-4 py-1.5 rounded-full shadow-lg transition duration-300"
-                >
-                  Logout
-                </button>
-              </>
+              <button
+                onClick={doLogout}
+                className="bg-red-600 hover:bg-red-700 text-white px-4 py-1.5 rounded-full shadow-lg transition duration-300"
+              >
+                Logout
+              </button>
             ) : (
               <>
                 <Link to="/login" className="font-semibold hover:text-yellow-300 transition duration-300">
@@ -100,6 +105,13 @@ export default function Navbar() {
           <Link to="/" onClick={() => setOpen(false)} className="font-semibold">Home</Link>
           <Link to="/cart" onClick={() => setOpen(false)} className="font-semibold">Cart</Link>
           <Link to="/contact" onClick={() => setOpen(false)} className="font-semibold">Contact</Link>
+
+          {/* ⭐ Mobile My Orders */}
+          {auth && (
+            <Link to="/my-orders" onClick={() => setOpen(false)} className="font-semibold">
+              My Orders
+            </Link>
+          )}
 
           {admin && (
             <Link to="/admin" onClick={() => setOpen(false)} className="font-semibold">Admin</Link>
