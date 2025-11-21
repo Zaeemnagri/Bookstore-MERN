@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const { authMiddleware } = require('../middleware/auth');
 
-const secret = process.env.JWT_SECRET || 'secret';
+const secret = process.env.JWT_SECRET || 'secret123';
 
 router.post('/register', async (req,res) => {
   try {
