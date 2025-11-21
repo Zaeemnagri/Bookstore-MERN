@@ -1,12 +1,11 @@
+// backend/models/Review.js
 const mongoose = require('mongoose');
 
-const reviewSchema = new mongoose.Schema({
+const ReviewSchema = new mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   book: { type: mongoose.Schema.Types.ObjectId, ref: 'Book' },
-  rating: { type: Number, min: 1, max: 5 },
-  comment: String,
-  createdAt: { type: Date, default: Date.now },
-  reported: { type: Boolean, default: false }
-});
+  rating: Number,
+  comment: String
+}, { timestamps: true });
 
-module.exports = mongoose.model('Review', reviewSchema);
+module.exports = mongoose.model('Review', ReviewSchema);
