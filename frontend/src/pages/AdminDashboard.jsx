@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import api from '../api';
+import { useNavigate } from 'react-router-dom';
 
 export default function AdminDashboard() {
+  const navigate = useNavigate();
   const [books, setBooks] = useState([]);
   const [form, setForm] = useState({
     title: '',
@@ -11,7 +13,7 @@ export default function AdminDashboard() {
     category: '',
     language: '',
     description: '',
-    coverUrl: ''   // using URL instead of file
+    coverUrl: '' // using URL instead of file
   });
 
   async function load() {
@@ -65,7 +67,28 @@ export default function AdminDashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-700 via-purple-600 to-pink-500 bg-[length:200%_200%] animate-gradientMove p-8 text-white">
-      <h2 className="text-4xl font-extrabold mb-8 text-center drop-shadow-lg">📘 Admin Dashboard</h2>
+
+      <h2 className="text-4xl font-extrabold mb-8 text-center drop-shadow-lg">
+        📘 Admin Dashboard
+      </h2>
+
+      {/* NEW BUTTONS ADDED HERE */}
+      <div className="flex justify-center gap-4 mb-8">
+        <button
+          onClick={() => navigate('/admin/orders')}
+          className="px-5 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-600 transition"
+        >
+          View Orders
+        </button>
+
+        <button
+          onClick={() => navigate('/admin/reviews')}
+          className="px-5 py-2 bg-green-500 text-white font-semibold rounded-lg shadow-lg hover:bg-green-600 transition"
+        >
+          View Reviews
+        </button>
+      </div>
+      {/* END BUTTONS */}
 
       <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
 
@@ -119,7 +142,6 @@ export default function AdminDashboard() {
               className={inputClass}
             />
 
-            {/* Image URL */}
             <input
               value={form.coverUrl}
               onChange={e => setForm({ ...form, coverUrl: e.target.value })}
