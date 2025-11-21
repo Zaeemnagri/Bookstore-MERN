@@ -10,6 +10,12 @@ import Checkout from './pages/Checkout';
 import Profile from './pages/Profile';
 import AdminDashboard from './pages/AdminDashboard';
 import Contact from './pages/Contact';
+import AdminOrders from './pages/AdminOrders';
+import AdminReviews from './pages/AdminReviews';
+import MyOrders from './pages/MyOrders';
+
+
+
 import { isAuthenticated, isAdmin } from './utils/auth';
 
 function PrivateRoute({ children }) {
@@ -34,7 +40,12 @@ export default function App(){
           <Route path="/profile" element={<PrivateRoute><Profile/></PrivateRoute>} />
           <Route path="/admin" element={<AdminRoute><AdminDashboard/></AdminRoute>} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/admin/orders" element={<AdminOrders />} />
+          <Route path="/admin/reviews" element={<AdminReviews />} />
+          <Route path="/my-orders" element={<MyOrders />} />
 
+          
+          
         </Routes>
       </div>
     </BrowserRouter>
